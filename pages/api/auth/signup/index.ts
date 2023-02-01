@@ -3,16 +3,15 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 import prisma from "../../../../prisma/client";
 import { SignJWT } from "jose";
+import Cookies from "cookies";
 
 const signup = async (req: NextApiRequest, res: NextApiResponse) => {
+  const cookies = new Cookies(req, res, {
+    secure: process.env.NODE_ENV === "production",
+  });
   try {
-    const { method } = req;
-    const { password } = req.body;
-    console.log(req);
     const saltRounds = 10;
-    console.log("saltRounds", saltRounds);
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
-    console.log("hashedPassword", hashedPassword);
 
     const newUser: TNewUser = await prisma.user.create({
       data: {
@@ -32,7 +31,12 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
       .setExpirationTime("5d")
       .sign(new TextEncoder().encode(process.env.JWT_SECRET || "secret"));
 
-    res.setHeader("Authorization", `Bearer ${token}`);
+    cookies.set("token", `Bearer ${token}`, {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+
     res.status(200).json(newUserWithoutPassword);
   } catch (error) {
     console.log(error);

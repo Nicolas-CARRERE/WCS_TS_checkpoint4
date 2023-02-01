@@ -2,8 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../prisma/client";
 import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
+import Cookies from "cookies";
 
 const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
+  const cookies = new Cookies(req, res, {
+    secure: process.env.NODE_ENV === "production",
+  });
   try {
     const { email, password } = req.body;
 
@@ -29,7 +33,12 @@ const signIn = async (req: NextApiRequest, res: NextApiResponse) => {
       .setExpirationTime("5d")
       .sign(secret);
 
-    res.setHeader("Authorization", `Bearer ${token}`);
+    cookies.set("token", `Bearer ${token}`, {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.log(error);

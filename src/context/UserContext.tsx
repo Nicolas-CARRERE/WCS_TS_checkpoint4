@@ -15,4 +15,7 @@ type TUserContextProviderProps = {
   children: React.ReactNode;
 };
 
-export function UserContextProvider({ children }: TUserContextProviderProps) {}
+export function UserContextProvider({ children }: TUserContextProviderProps) {
+  
+
+}
