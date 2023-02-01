@@ -53,7 +53,7 @@ export type TCredentials = {
   password: string;
 };
 
-export type AuthState = {
+export type TAuthState = {
   user: TUserWithoutPassword | null;
   isAuth: boolean;
 };
