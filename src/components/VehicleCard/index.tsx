@@ -1,23 +1,24 @@
-import { TVehicleBrand } from "@/types/apiTypes";
+import { TVehicle } from "@/types/apiTypes";
 import React from "react";
 import Image from "next/image";
-import brandFetcher from "@/utils/brandFetcher";
 import { useQueryClient } from "@tanstack/react-query";
+import vehicleFetcher from "@/utils/vehicleFetcher";
 import { useState } from "react";
 import ModalOnDelete from "../ModalOnDelete";
 
 type Props = {
-  brand: Omit<TVehicleBrand, "models">;
+  vehicle: TVehicle;
 };
 
-function BrandCard({ brand }: Props) {
+function VehicleCard({ vehicle }: Props) {
   const [showModal, setShowModal] = useState(false);
+
   const queryClient = useQueryClient();
 
-  const deleteBrand = async () => {
-    await brandFetcher.deleteBrandById(brand.id);
+  const deleteVehicle = async () => {
+    await vehicleFetcher.deleteVehicleById(vehicle.id);
     queryClient.invalidateQueries({
-      queryKey: "brands",
+      queryKey: "vehicles",
       refetchActive: true,
     });
   };
@@ -27,7 +28,7 @@ function BrandCard({ brand }: Props) {
   };
 
   const handleDeleteConfirmed = (): void => {
-    deleteBrand();
+    deleteVehicle();
     setShowModal(false);
   };
 
@@ -40,29 +41,29 @@ function BrandCard({ brand }: Props) {
       <div className="flex flex-col items-center justify-center h-full">
         {/* <Image
           className="bg-slate-400 rounded-full"
-          src={brand.logoUrl}
+          src={model.logoUrl}
           width={32}
           height={32}
-          alt={brand.name}
+          alt={model.name}
         /> */}
         <div className="w-32 h-32 bg-slate-400 rounded-full"></div>
         <div className="flex justify-between">
-          <div className="text-xl font-bold mr-6">{`${brand.name}`}</div>
+          <div className="text-xl font-bold mr-6">{`${vehicle.name}`}</div>
           <button
             className="text-xl font-bold ml-6"
             onClick={handleItemToDelete}>
             🗑️
           </button>
-          {showModal && (
-            <ModalOnDelete
-              handleDeleteConfirmed={handleDeleteConfirmed}
-              handleDeleteCancelled={handleDeleteCancelled}
-            />
-          )}
         </div>
       </div>
+      {showModal && (
+        <ModalOnDelete
+          handleDeleteConfirmed={handleDeleteConfirmed}
+          handleDeleteCancelled={handleDeleteCancelled}
+        />
+      )}
     </div>
   );
 }
 
-export default BrandCard;
+export default VehicleCard;

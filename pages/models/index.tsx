@@ -9,7 +9,6 @@ import {
 import { FieldValue, useForm } from "react-hook-form";
 import { TNewVehicleModel, TVehicleBrand } from "@/types/apiTypes";
 import modelFetcher from "@/utils/modelFetcher";
-import Brands from "pages/brands";
 import brandFetcher from "@/utils/brandFetcher";
 
 type Props = {};

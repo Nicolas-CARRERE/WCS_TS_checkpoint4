@@ -33,6 +33,12 @@ export type TVehicle = {
   user: TUser;
 };
 
+export type TNewVehicle = {
+  name: string;
+  modelId: string;
+  userId: string;
+};
+
 export type TVehicleModel = {
   id: string;
   name: string;

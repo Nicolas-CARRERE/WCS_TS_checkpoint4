@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { FieldValue, useForm } from "react-hook-form";
 import { TNewUser } from "@/types/apiTypes";
 import axiosInstance from "@/utils/axiosinstance";

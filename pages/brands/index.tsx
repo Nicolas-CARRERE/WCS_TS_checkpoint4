@@ -48,7 +48,7 @@ function Brands({}: Props) {
   }
 
   if (error) {
-    return <div>Error</div>;
+    return <div>{JSON.stringify(error)}</div>;
   }
 
   return (
