@@ -43,6 +43,14 @@ export type TVehicleModel = {
   users: TUser[];
 };
 
+export type TNewVehicleModel = {
+  name: string;
+  imageUrl1: string;
+  imageUrl2: string;
+  imageUrl3: string;
+  brandId: string;
+};
+
 export type TVehicleBrand = {
   id: string;
   name: string;

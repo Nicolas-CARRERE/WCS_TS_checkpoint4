@@ -57,18 +57,18 @@ function UserContextProvider({ children }: TUserContextProviderProps) {
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { data } = await axiosInstance.get("/auth/me");
-        setAuthState(() => ({
-          isAuth: true,
-          user: data,
-        }));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    checkAuth();
+    // const checkAuth = async () => {
+    //   try {
+    //     const { data } = await axiosInstance.get("/auth/me");
+    //     setAuthState(() => ({
+    //       isAuth: true,
+    //       user: data,
+    //     }));
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // checkAuth();
   }, []);
 
   return (
