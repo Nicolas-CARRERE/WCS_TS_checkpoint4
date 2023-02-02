@@ -25,7 +25,9 @@
 //     console.log("No token");
 //     return next();
 //   }
-//   const decodedToken = jwt.verify(token, secret);
+//   const decodedToken = SignJWT.verify(token, secret, { complete: true });
+
+//   console.log("decodedToken", decodedToken);
 
 //   if (typeof decodedToken === "string") {
 //     throw new Error(decodedToken);
