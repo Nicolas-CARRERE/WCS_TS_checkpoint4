@@ -5,7 +5,7 @@ type Props = {};
 
 function index({}: Props) {
   return (
-    <div className="w-screen h-[8vh]  bg-slate-400">
+    <div className="w-screen h-[8vh]  bg-slate-400 fixed top-0">
       <ul className="w-full h-full flex flex-row justify-around items-center text-2xl font-bold">
         <li>
           <Link href="/"> Home </Link>

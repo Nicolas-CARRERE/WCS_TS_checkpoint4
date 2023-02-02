@@ -25,7 +25,7 @@ function SignUp({}: Props) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full overflow-auto">
       <form className="w-1/2 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <label className="label-field" htmlFor="firstname">
           First Name

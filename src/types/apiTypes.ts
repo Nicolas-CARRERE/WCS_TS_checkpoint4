@@ -46,7 +46,13 @@ export type TVehicleModel = {
 export type TVehicleBrand = {
   id: string;
   name: string;
+  logoUrl: string;
   models: TVehicleModel[];
+};
+
+export type TNewVehicleBrand = {
+  name: string;
+  logoUrl: string;
 };
 
 export type TCredentials = {

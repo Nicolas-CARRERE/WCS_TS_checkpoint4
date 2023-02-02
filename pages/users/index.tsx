@@ -9,6 +9,7 @@ function Users({}: Props) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["users"],
     queryFn: () => userFetcher.getUsers(),
+    staleTime: 5000,
   });
 
   if (isLoading) {

@@ -15,9 +15,11 @@ function Layout({ children }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <UserContextProvider>
-        <body className="w-screen fixed flex flex-col h-screen">
+        <body className="w-screen h-screen flex flex-col">
           <NavBar />
-          <main className="flex-grow flex">{children}</main>
+          <main className="h-[calc(100%_-_8vh)] w-full flex fixed top-[8vh] bg-slate-50">
+            {children}
+          </main>
         </body>
       </UserContextProvider>
     </html>
