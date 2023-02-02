@@ -13,15 +13,16 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
     const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
 
-    const newUser: TNewUser = await prisma.user.create({
-      data: {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        email: req.body.email,
-        password: hashedPassword,
-      },
-    });
+    const newUser: Omit<TNewUser, "passwordConfirmation"> =
+      await prisma.user.create({
+        data: {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          username: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+        },
+      });
     const { password: removedPassword, ...newUserWithoutPassword } = newUser;
     console.log(newUserWithoutPassword);
 

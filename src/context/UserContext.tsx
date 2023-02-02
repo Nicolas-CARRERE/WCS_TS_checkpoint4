@@ -29,7 +29,7 @@ function UserContextProvider({ children }: TUserContextProviderProps) {
 
   const signIn = async ({ email, password }: TCredentials) => {
     try {
-      const { data } = axiosInstance.post("/auth/signin", {
+      const { data } = await axiosInstance.post("/auth/signin", {
         email,
         password,
       });
