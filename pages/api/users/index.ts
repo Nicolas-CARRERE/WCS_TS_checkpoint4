@@ -6,7 +6,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (method === "GET") {
     const users = await prisma.user.findMany();
-    return res.status(200).json(users);
+    const usersWithoutPassword = users.map((user) => {
+      const { password, ...userWithoutPassword } = user;
+      return userWithoutPassword;
+    });
+
+    return res.status(200).json(usersWithoutPassword);
   } else {
     res.status(405).end(`Method ${method} not allowed`);
   }

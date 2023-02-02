@@ -15,7 +15,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           vehicles: true,
         },
       });
-      res.status(200).json(user);
+      const { password, ...userWithoutPassword } = user;
+      res.status(200).json(userWithoutPassword);
       break;
     case "PUT":
       const updateUser = await prisma.user.update({
@@ -26,7 +27,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           ...req.body,
         },
       });
-      res.status(200).json(updateUser);
+      const { password: removedPassword, ...userUpdatedWithoutPassword } =
+        updateUser;
+      res.status(200).json(userUpdatedWithoutPassword);
       break;
     case "DELETE":
       await prisma.user.delete({
